@@ -48,4 +48,4 @@ def getFlag(country: str) -> Image.Image:
     flag_image: Image.Image = Image.open(
         BytesIO(flag_response.content))
 
-    return flag_image
+    return flag_image.convert("RGB")
