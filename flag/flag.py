@@ -38,6 +38,10 @@ class Flag:
         Args:
             country (str): New guess
         """
+
+        if len(country) == 0:
+            return
+
         self.prior_guesses.append(country)
         self.update_render()
 
