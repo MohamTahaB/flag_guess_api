@@ -1,25 +1,27 @@
 
 import uuid
-from utils.utils import randomCountryName
-from typing import List
+from flag.flag import Flag
 
 
 class Session:
-    def __init__(self):
+    def __init__(self, country: str | None = None):
         self.id: str = uuid.uuid4().hex
-        self.country: str = randomCountryName()
+        self.flag: Flag = Flag(country)
 
-        self.resemblance: int = 0
-        self.prior_guesses: List[str] = list()
-        # TODO! Add the 2D table of the render so far
-        self.render: List[List[int]]
+    @property
+    def resemblance(self) -> float:
+        """Wraps the resemblance property in the Flag class
 
-    def compute_guess(self, guess: str):
-        """Takes the user's guess and computes the new render and resemblance
-
-        Args:
-            guess (str): user's Country guess
+        Returns:
+            float: resemblance to the initial flag
         """
 
-        self.prior_guesses.append(guess)
-        pass
+        return self.flag.resemblance
+
+    def add_guess(self, country: str) -> None:
+        """Wraps the method add_guess from the Flag class
+
+        Args:
+            country (str): New guess
+        """
+        self.flag.add_guess(country)

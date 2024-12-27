@@ -8,7 +8,7 @@ THRESHOLD: int = 30
 
 class Flag:
 
-    def __init__(self, _country: str = None):
+    def __init__(self, _country: str | None = None):
         self.country: str = randomCountryName() if _country == None else _country
 
         self.flag: Image.Image = getFlag(self.country)
