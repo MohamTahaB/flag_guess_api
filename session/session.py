@@ -1,6 +1,8 @@
 
 import uuid
 from flag.flag import Flag
+import io
+import base64
 
 
 class Session:
@@ -17,6 +19,19 @@ class Session:
         """
 
         return self.flag.resemblance
+
+    @property
+    def render_base64(self) -> str:
+        """Returns the flag render as Base64 string
+
+        Returns:
+            str: Flag render in Base64
+        """
+        buffer = io.BytesIO()
+        self.flag.render.save(buffer, format="PNG")
+        buffer.seek(0)
+
+        return base64.b64encode(buffer.getvalue()).decode("utf-8")
 
     def add_guess(self, country: str) -> None:
         """Wraps the method add_guess from the Flag class
